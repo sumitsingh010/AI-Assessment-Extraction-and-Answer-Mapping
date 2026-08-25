@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useAssessment } from '@/context/AssessmentContext';
 import { Sparkles } from 'lucide-react';
 import { fileToBase64Images } from '@/lib/pdf-utils';
+import { DEMO_DATA, getDemoImage } from '@/lib/demo-data';
 
 export default function ExtractingScreen() {
   const { questionFile, answerFile, setResults, setImages, setScreen } = useAssessment();
@@ -81,12 +82,24 @@ export default function ExtractingScreen() {
           {error ? <span className="text-red-500">{error}</span> : status}
         </div>
         
-        {error && (
+        {error ? (
           <button 
             onClick={() => setScreen('upload')}
             className="mt-6 text-sm text-gray-500 underline hover:text-gray-900"
           >
             Go back to Upload
+          </button>
+        ) : (
+          <button 
+            onClick={() => {
+              const demoImg = getDemoImage();
+              setImages([demoImg], [demoImg]);
+              setResults(DEMO_DATA as any);
+              setScreen('mapping');
+            }}
+            className="mt-6 text-sm text-blue-500 underline hover:text-blue-700"
+          >
+            Taking too long? Skip to Demo View
           </button>
         )}
       </div>
