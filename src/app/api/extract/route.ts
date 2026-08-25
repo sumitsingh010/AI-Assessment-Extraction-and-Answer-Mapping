@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import { extractQuestions, extractAnswers, gradeAnswers } from '@/lib/gemini';
 
-export const maxDuration = 60; // Next.js max duration config for Vercel
-
 export async function POST(req: Request) {
   try {
     const { questionImages, answerImages } = await req.json();
