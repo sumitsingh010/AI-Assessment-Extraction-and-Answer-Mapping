@@ -1,11 +1,10 @@
-import * as pdfjsLib from 'pdfjs-dist';
-
-// Configure worker to use the local copy in the public folder
-if (typeof window !== 'undefined') {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
-}
-
 export async function fileToBase64Images(file: File): Promise<string[]> {
+  // Dynamically import pdfjs only on the client side to prevent SSR DOMMatrix errors
+  const pdfjsLib = await import('pdfjs-dist');
+  
+  if (typeof window !== 'undefined') {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+  }
   if (file.type.startsWith('image/')) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
