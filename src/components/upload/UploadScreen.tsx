@@ -3,9 +3,10 @@
 import React, { useState } from 'react';
 import { useAssessment } from '@/context/AssessmentContext';
 import FileUploadCard from './FileUploadCard';
+import { DEMO_DATA, getDemoImage } from '@/lib/demo-data';
 
 export default function UploadScreen() {
-  const { setFiles, setScreen } = useAssessment();
+  const { setFiles, setScreen, setImages, setResults } = useAssessment();
   const [qFile, setQFile] = useState<File | null>(null);
   const [aFile, setAFile] = useState<File | null>(null);
 
@@ -65,13 +66,16 @@ export default function UploadScreen() {
           </button>
           
           <button
-            onClick={async () => {
-              // Load Demo Data
-              const { DEMO_DATA, getDemoImage } = await import('@/lib/demo-data');
-              const demoImg = getDemoImage();
-              setImages([demoImg], [demoImg]);
-              setResults(DEMO_DATA as any);
-              setScreen('mapping');
+            onClick={() => {
+              try {
+                const demoImg = getDemoImage();
+                setImages([demoImg], [demoImg]);
+                setResults(DEMO_DATA as any);
+                setScreen('mapping');
+              } catch (e) {
+                console.error("Demo failed:", e);
+                alert("Failed to load demo.");
+              }
             }}
             className="px-8 py-3 rounded-full font-medium text-sm transition-all flex items-center space-x-2 bg-blue-100 hover:bg-blue-200 text-blue-700 shadow-sm"
           >
