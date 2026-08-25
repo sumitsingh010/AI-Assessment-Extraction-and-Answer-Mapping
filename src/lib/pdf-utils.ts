@@ -3,7 +3,7 @@ export async function fileToBase64Images(file: File): Promise<string[]> {
   const pdfjsLib = await import('pdfjs-dist');
   
   if (typeof window !== 'undefined') {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
   }
   if (file.type.startsWith('image/')) {
     return new Promise((resolve, reject) => {
