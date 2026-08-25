@@ -42,7 +42,7 @@ export default function TopBar() {
             {/* Avatar placeholder */}
             <div className="w-full h-full bg-orange-300"></div>
           </div>
-          <span className="text-sm font-medium text-gray-700 hidden md:block">Madhur Rastogi</span>
+          <span className="text-sm font-medium text-gray-700 hidden md:block">Sumit Singh</span>
           <ChevronDown className="w-4 h-4 text-gray-500 hidden md:block" />
         </div>
       </div>

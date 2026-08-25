@@ -49,20 +49,37 @@ export default function UploadScreen() {
         />
       </div>
 
-      <div className="flex flex-col items-center">
-        <button
-          onClick={handleStartMapping}
-          disabled={!isReady}
-          className={`px-8 py-3 rounded-full font-medium text-sm transition-all flex items-center space-x-2 ${
-            isReady 
-              ? 'bg-[#333333] hover:bg-black text-white shadow-md' 
-              : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-          }`}
-        >
-          <span>Start Mapping</span>
-          <span>→</span>
-        </button>
-        <p className="text-xs text-gray-400 mt-4 max-w-xs text-center">
+      <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col md:flex-row items-center gap-4">
+          <button
+            onClick={handleStartMapping}
+            disabled={!isReady}
+            className={`px-8 py-3 rounded-full font-medium text-sm transition-all flex items-center space-x-2 ${
+              isReady 
+                ? 'bg-[#333333] hover:bg-black text-white shadow-md' 
+                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+            }`}
+          >
+            <span>Start Mapping</span>
+            <span>→</span>
+          </button>
+          
+          <button
+            onClick={async () => {
+              // Load Demo Data
+              const { DEMO_DATA, getDemoImage } = await import('@/lib/demo-data');
+              const demoImg = getDemoImage();
+              setImages([demoImg], [demoImg]);
+              setResults(DEMO_DATA as any);
+              setScreen('mapping');
+            }}
+            className="px-8 py-3 rounded-full font-medium text-sm transition-all flex items-center space-x-2 bg-blue-100 hover:bg-blue-200 text-blue-700 shadow-sm"
+          >
+            <span>✨ Try Instant Demo</span>
+          </button>
+        </div>
+        
+        <p className="text-xs text-gray-400 mt-2 max-w-xs text-center">
           Once both files are uploaded, you'll be able to map answers with questions
         </p>
       </div>
