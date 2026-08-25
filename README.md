@@ -1,5 +1,7 @@
 # AI Assessment Extraction & Answer Mapping
 
+**Live Demo:** [https://ai-assessment-extraction-and-answer.vercel.app/](https://ai-assessment-extraction-and-answer.vercel.app/)
+
 A web application designed to help teachers automate the grading and mapping of exam papers. By uploading a question paper and a student's handwritten answer sheet, the application extracts the questions, reads the student's answers, evaluates them, and displays a side-by-side mapped view with visual highlights.
 
 ## Features
